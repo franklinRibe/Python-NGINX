@@ -29,15 +29,14 @@ if __name__ == "__main__":
     
     ## função para criar o container
     def create_container(ospath, fpaths, fdestines):
+        i = 0
         for fpath in fpaths:
             filesource = ospath+fpath
-            
-            for fdestine in fdestines:
-
-                copy = "cp "+filesource+fdestine
-
-                command_cp = commands(copy, '')
-                command_cp.execute_command()
+            fdestine = fdestines[i]
+            copy = "sudo cp "+filesource+fdestine
+            command_cp = commands(copy, '')
+            command_cp.execute_command()
+            i += 1
         
     ## Instalando NGINX e pacotes usados  no Docker-ce
 
