@@ -94,7 +94,7 @@ if __name__ == "__main__":
     ## configurando o caminho do SO
      
     os_path = os.path.dirname(os.path.abspath(__file__))
-    file_paths = ["/html/index1.html ", "/html/index2.html ", "/html/index3.html "]
+    file_paths = ["/app1/index.html ", "/app2/index.html ", "/app3/index.html "]
     filedestines = ["/var/www/app1", "/var/www/app2", "/var/www/app3"]
     apps = ["app1.dexter.com.br", "app2.dexter.com.br", "app3.dexter.com.br"]
     create_container(os_path, file_paths, filedestines, apps)
