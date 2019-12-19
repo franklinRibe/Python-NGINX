@@ -28,13 +28,18 @@ if __name__ == "__main__":
     
     
     ## função para criar o container
-    def create_container(ospath, fpaths, fdestine):
+    def create_container(ospath, fpaths, fdestines):
         for fpath in fpaths:
             filesource = ospath+fpath
-            pdb.set_trace()
-            copy = "cp "+filesource+fdestine
-            command_cp = commands(copy, '')
-            command_cp.execute_command()
+            
+            for fdestine in fdestines:
+
+                copy = "cp "+filesource+fdestine
+
+                pdb.set_trace()
+                
+                command_cp = commands(copy, '')
+                command_cp.execute_command()
         
     ## Instalando NGINX e pacotes usados  no Docker-ce
 
@@ -87,8 +92,8 @@ if __name__ == "__main__":
      
     os_path = os.path.dirname(__file__)
     file_paths = ["/html/index1.html ", "/html/index2.html ", "/html/index3.html "]
-    filedestine = ["/var/www/app1", "/var/www/app2", "/var/www/app3"]
-    create_container(os_path, file_paths, filedestine)
+    filedestines = ["/var/www/app1", "/var/www/app2", "/var/www/app3"]
+    create_container(os_path, file_paths, filedestines)
 
 
 
