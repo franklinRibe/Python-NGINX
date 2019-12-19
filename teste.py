@@ -28,19 +28,37 @@ if __name__ == "__main__":
     
     
     ## função para criar o container
-    def create_container(ospath, fpaths, fdestines, url_apps):
+    def create_container(ospath, fpaths, nconfs, fdestines, url_apps):
         i = 0
         for fpath in fpaths:
             filesource = ospath+fpath
             fdestine = fdestines[i]
-            copy = "sudo cp "+filesource+fdestine            
+            confsource = nconfs[i]
+
+            copy = "sudo cp "+filesource+fdestine 
+            conf = "sudo cp "+confsource+"/etc/nginx/sites-available"
+            mkdir = "sudo mkdir /var/log/nginx/app"+str(i)
+            ln = "sudo ln /etc/nginx/sites-available/app"+str(i)+".conf /etc/nginx/sites-enabled/app"+str(i)+".conf"            
             upcontainer = "sudo docker run -dit --name "+url_apps[i]+" -p 808"+str(i)+":80 -v "+fdestine+":/usr/local/apache2/htdocs/ httpd:latest"
+            rstart = "sudo systemctl restart nginx"
 
             command_cp = commands(copy, '')
             command_cp.execute_command()
 
+            command_conf = commands(conf, '')
+            command_conf.execute_command()
+
+            command_mkdir = commands(mkdir, '')
+            command_mkdir.execute_command()
+
+            command_ln = commands(ln, '')
+            command_ln.execute_command()
+
             container = commands(upcontainer, '')
             container.execute_command()
+
+            rs = commands(rstart, '')
+            rs.execute_command()
 
             i += 1
 
@@ -95,9 +113,12 @@ if __name__ == "__main__":
      
     os_path = os.path.dirname(os.path.abspath(__file__))
     file_paths = ["/app1/index.html ", "/app2/index.html ", "/app3/index.html "]
+    nginx_confs = ["/nginx/app1.conf ", "/nginx/app2.conf ", "/nginx/app3.conf "]
     filedestines = ["/var/www/app1", "/var/www/app2", "/var/www/app3"]
     apps = ["app1.dexter.com.br", "app2.dexter.com.br", "app3.dexter.com.br"]
-    create_container(os_path, file_paths, filedestines, apps)
+    create_container(os_path, file_paths, nginx_confs, filedestines, apps)
+
+    ## copiando os arquivos de conf do nginx
 
 
 
