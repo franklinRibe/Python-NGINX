@@ -34,11 +34,12 @@ if __name__ == "__main__":
             filesource = ospath+fpath
             fdestine = fdestines[i]
             confsource = nconfs[i]
+            app = url_apps[i].split(".")
 
             copy = "sudo cp "+filesource+fdestine 
             conf = "sudo cp "+confsource+"/etc/nginx/sites-available"
             mkdir = "sudo mkdir /var/log/nginx/app"+str(i)
-            ln = "sudo ln /etc/nginx/sites-available/app"+str(i)+".conf /etc/nginx/sites-enabled/app"+str(i)+".conf"            
+            ln = "sudo ln /etc/nginx/sites-available/app"+app+".conf /etc/nginx/sites-enabled/app"+apps+".conf"            
             upcontainer = "sudo docker run -dit --name "+url_apps[i]+" -p 808"+str(i)+":80 -v "+fdestine+":/usr/local/apache2/htdocs/ httpd:latest"
             rstart = "sudo systemctl restart nginx"
 
