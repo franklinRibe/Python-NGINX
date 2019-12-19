@@ -34,7 +34,6 @@ if __name__ == "__main__":
             filesource = ospath+fpath
             fdestine = fdestines[i]
             confsource = ospath+nconfs[i]
-            app = url_apps[i].split(".")
 
             copy = "sudo cp "+filesource+fdestine 
             conf = "sudo cp "+confsource+"/etc/nginx/sites-available"
