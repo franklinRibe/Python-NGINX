@@ -28,16 +28,22 @@ if __name__ == "__main__":
     
     
     ## função para criar o container
-    def create_container(ospath, fpaths, fdestines):
+    def create_container(ospath, fpaths, fdestines, url_apps):
         i = 0
         for fpath in fpaths:
             filesource = ospath+fpath
             fdestine = fdestines[i]
-            copy = "sudo cp "+filesource+fdestine
+            copy = "sudo cp "+filesource+fdestine            
+            upcontainer = "sudo docker run -dit --name "+url_apps[i]+" -p 808"+str(i)+":80 -v "+fdestine+":/usr/local/apache2/htdocs/ httpd:latest"
+
             command_cp = commands(copy, '')
             command_cp.execute_command()
+
+            container = commands(upcontainer, '')
+            container.execute_command()
+
             i += 1
-        
+
     ## Instalando NGINX e pacotes usados  no Docker-ce
 
     apt = "sudo apt-get -y install "
@@ -90,8 +96,9 @@ if __name__ == "__main__":
     os_path = os.path.dirname(os.path.abspath(__file__))
     file_paths = ["/html/index1.html ", "/html/index2.html ", "/html/index3.html "]
     filedestines = ["/var/www/app1", "/var/www/app2", "/var/www/app3"]
-    create_container(os_path, file_paths, filedestines)
+    apps = ["app1.dexter.com.br", "app2.dexter.com.br", "app3.dexter.com.br"]
+    create_container(os_path, file_paths, filedestines, apps)
 
 
 
-    #sudo docker run -dit --name app1.dexter.com.br -p 8080:80 -v /var/www/app1:/usr/local/apache2/htdocs/ httpd:2.4
+    
