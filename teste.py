@@ -36,8 +36,6 @@ if __name__ == "__main__":
 
                 copy = "cp "+filesource+fdestine
 
-                pdb.set_trace()
-                
                 command_cp = commands(copy, '')
                 command_cp.execute_command()
         
@@ -90,7 +88,7 @@ if __name__ == "__main__":
 
     ## configurando o caminho do SO
      
-    os_path = os.path.dirname(__file__)
+    os_path = os.path.dirname(os.path.abspath(__file__))
     file_paths = ["/html/index1.html ", "/html/index2.html ", "/html/index3.html "]
     filedestines = ["/var/www/app1", "/var/www/app2", "/var/www/app3"]
     create_container(os_path, file_paths, filedestines)
