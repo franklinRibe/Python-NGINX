@@ -28,19 +28,19 @@ if __name__ == "__main__":
     
     
     ## função para criar o container
-    def create_container(ospath, fpaths, nconfs, fdestines, url_apps):
+    def create_container(ospath, fpaths, nconfs, fdestines, name_apps):
         i = 0
         for fpath in fpaths:
             filesource = ospath+fpath
             fdestine = fdestines[i]
-            confsource = nconfs[i]
+            confsource = ospath+nconfs[i]
             app = url_apps[i].split(".")
 
             copy = "sudo cp "+filesource+fdestine 
             conf = "sudo cp "+confsource+"/etc/nginx/sites-available"
             mkdir = "sudo mkdir /var/log/nginx/app"+str(i)
-            ln = "sudo ln /etc/nginx/sites-available/app"+app+".conf /etc/nginx/sites-enabled/app"+apps+".conf"            
-            upcontainer = "sudo docker run -dit --name "+url_apps[i]+" -p 808"+str(i)+":80 -v "+fdestine+":/usr/local/apache2/htdocs/ httpd:latest"
+            ln = "sudo ln /etc/nginx/sites-available/"+name_apps[i]+".conf /etc/nginx/sites-enabled/"+name_apps[i]+".conf"            
+            upcontainer = "sudo docker run -dit --name "+name_apps[i]+" -p 808"+str(i)+":80 -v "+fdestine+":/usr/local/apache2/htdocs/ httpd:latest"
             rstart = "sudo systemctl restart nginx"
 
             command_cp = commands(copy, '')
@@ -116,7 +116,7 @@ if __name__ == "__main__":
     file_paths = ["/app1/index.html ", "/app2/index.html ", "/app3/index.html "]
     nginx_confs = ["/nginx/app1.conf ", "/nginx/app2.conf ", "/nginx/app3.conf "]
     filedestines = ["/var/www/app1", "/var/www/app2", "/var/www/app3"]
-    apps = ["app1.dexter.com.br", "app2.dexter.com.br", "app3.dexter.com.br"]
+    apps = ["app1", "app2", "app3"]
     create_container(os_path, file_paths, nginx_confs, filedestines, apps)
 
     ## copiando os arquivos de conf do nginx
