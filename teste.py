@@ -92,3 +92,5 @@ if __name__ == "__main__":
 
 
     #sudo docker run -dit --name app1.dexter.com.br -p 8080:80 -v /var/www/app1:/usr/local/apache2/htdocs/ httpd:2.4
+
+
