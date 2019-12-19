@@ -31,6 +31,7 @@ if __name__ == "__main__":
     def create_container(ospath, fpaths, fdestine):
         for fpath in fpaths:
             filesource = ospath+fpath
+            pdb.set_trace()
             copy = "cp "+filesource+fdestine
             command_cp = commands(copy, '')
             command_cp.execute_command()
@@ -88,9 +89,7 @@ if __name__ == "__main__":
     file_paths = ["/html/index1.html ", "/html/index2.html ", "/html/index3.html "]
     filedestine = ["/var/www/app1", "/var/www/app2", "/var/www/app3"]
     create_container(os_path, file_paths, filedestine)
-    
+
 
 
     #sudo docker run -dit --name app1.dexter.com.br -p 8080:80 -v /var/www/app1:/usr/local/apache2/htdocs/ httpd:2.4
-
-
