@@ -8,5 +8,4 @@ com apache.
 <li>Segundo o Script instala o Docker
 <li>Terceiro o Script move os arquivos de conf para as pastas correspondentes
 <li>Quarto o Script ativa os containeres
-<li>Quinto configura o SO para responder um DNS local para cada uma das aplicações
 </ul>
